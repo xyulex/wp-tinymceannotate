@@ -1,5 +1,5 @@
-=== TinyMCE Annotate ===
-Contributors: xyulex 
+#TinyMCE Annotate
+Contributors: xyulex
 Tags: tinymce, tiny mce, tiny, advanced, note, notes, annotate, annotation, annotations, plugin, post
 Requires at least: 3.0
 Tested up to: 4.2.2
@@ -10,7 +10,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=raulm
 
 Create annotations in your content with this TinyMCE plugin.
 
-== Description ==
+## Description
 You can create annotations in your pages or posts.
 Use cases could be personal annotations or instructions for your review team.
 Once read, you can delete or edit them as well as creating new ones.
@@ -25,17 +25,17 @@ You can show or hide current annotations (it doesn't remove the annotations, jus
 
 Annotations are only shown in the TinyMCE editor, that means you will only see them in the admin area.
 
-== Installation ==
+## Installation
 Extract the zip file and just drop the contents in the wp-content/plugins/ directory of your WordPress installation and then activate the Plugin from Plugins page.
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions
 = I can't delete annotation =
 Make sure you have selected at least a character.
 
 = I can't create an annotation =
 Make sure you have selected at least a character.
 
-== Screenshots ==
+## Screenshots
 1. General view with the three available icons (Create/Edit - Delete - Show/hide)
 2. Create annotation
 
