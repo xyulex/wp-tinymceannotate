@@ -29,18 +29,12 @@ Annotations are only shown in the TinyMCE editor, that means you will only see t
 Extract the zip file and just drop the contents in the wp-content/plugins/ directory of your WordPress installation and then activate the Plugin from Plugins page.
 
 ## Frequently Asked Questions
-= I can't delete annotation =
+* I can't delete annotation
 Make sure you have selected at least a character.
 
-= I can't create an annotation =
+* I can't create an annotation
 Make sure you have selected at least a character.
 
 ## Screenshots
 1. General view with the three available icons (Create/Edit - Delete - Show/hide)
 2. Create annotation
-
-== Changelog ==
-0.1 Initial version
-
-== Upgrade Notice ==
--
