@@ -3,7 +3,7 @@ Contributors: xyulex
 Tags: tinymce, tiny mce, tiny, advanced, note, notes, annotate, annotation, annotations, plugin, post
 Requires at least: 3.0
 Tested up to: 4.2.2
-Stable tag: 0.1
+Stable tag: 0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=raulmartinez911%40hotmail%2ecom&item_name=TinyMCEAnnotateDonation &no_note=0&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
@@ -40,7 +40,13 @@ Make sure you have selected at least a character.
 2. Create annotation
 
 == Changelog ==
-0.1 Initial version
+0.2
+Code refactor.
+Added default color for annotation.
+Added tooltip style for substituting alt attribute.
+
+0.1 
+Initial version
 
 == Upgrade Notice ==
 -

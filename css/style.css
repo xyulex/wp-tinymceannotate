@@ -1,0 +1,26 @@
+/**
+ * Plugin Name: TinyMCE Annotate
+ * Description: Create annotations on your posts or pages
+ * Version:     0.2
+ * Author:      xyulex
+ * Author URI:  https://profiles.wordpress.org/xyulex/
+ * License:     GPLv2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ */
+.annotation:hover {
+  cursor:pointer;
+}
+
+.annotation:hover:after {   
+  content: attr(data-annotation);
+  color: #333;
+  position: absolute;   
+  white-space:normal;
+  z-index: 20px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  border:2px solid #000;
+  padding:10px;
+  background-color: #fff;
+}

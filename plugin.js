@@ -1,8 +1,17 @@
+/**
+ * Plugin Name: TinyMCE Annotate
+ * Description: Create annotations on your posts or pages
+ * Version:     0.2
+ * Author:      xyulex
+ * Author URI:  https://profiles.wordpress.org/xyulex/
+ * License:     GPLv2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ */
+
 (function($) {
 
     tinymce.PluginManager.add('tma_annotate', function(editor, url) {
-        var state;
-        var firsttime = 1;
+        var state;         
 
         function tma_hide_action() {
             state = !state;
@@ -11,19 +20,11 @@
             });
             body = editor.getBody();
 
-            if (firsttime == 1) {
-                bodyOG = editor.getContent();
-                firsttime = -1;
-            }
-
             if (state) { // Hide
-                current = editor.getContent();
-                $(body).find(".annotation")
-                    .attr({
-                        "style": "",
-                        "title": "",
-                        "data-annotation": ""
-                    });
+                current = editor.getContent();               
+                tinymce.each( editor.$('span.annotation'), function(node) {
+                  editor.dom.remove(node, true);
+                });                
             } else { // Show
                 if (!body) {
                     $(body).html('');
@@ -48,11 +49,11 @@
             image: url + '/img/annotation.png',
             onclick: function() {
                 annotation = '';
-                color = '';
+                color = '#F0E465';
                 node = editor.selection.getNode();
                 nodeName = node.nodeName;
 
-                if (nodeName == 'SPAN') {
+                if (nodeName == 'SPAN') {                    
                     nodeDataAnnotation = $(node).attr("data-annotation");
                     nodeDataStyle = $(node).css("background-color");
 
@@ -61,7 +62,7 @@
                         annotation = nodeDataAnnotation;
                         var ctx = document.createElement('canvas').getContext('2d');
                         ctx.strokeStyle = nodeDataStyle;
-                        var color = ctx.strokeStyle;
+                        var color = ctx.strokeStyle;                        
                     }
                 }
 
@@ -84,8 +85,12 @@
                         }],
 
                         onsubmit: function(e) {
-                            if (e.data.annotation && e.data.annotationbg != "#000000") {
-                                editor.selection.setContent('<span class="annotation" alt ="' + e.data.annotation + '" title = "' + e.data.annotation + '" data-annotation="' + e.data.annotation + '" style="background-color:' + e.data.annotationbg + '">' + selectedText + '</span>');
+                            if (e.data.annotation) { 
+                                if ($(node).attr("data-annotation")) {
+                                    editor.dom.remove(node);
+                                }
+                               editor.selection.setContent('<span class="annotation"  data-annotation="' + e.data.annotation + '" style="background-color:' + e.data.annotationbg + '">' + selectedText + '</span>');
+
                             } else {
                                 editor.windowManager.alert("Select the color and the annotation text");
                                 return false;
