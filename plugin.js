@@ -1,7 +1,7 @@
 /**
  * Plugin Name: TinyMCE Annotate
  * Description: Create annotations on your posts or pages
- * Version:     0.2.2
+ * Version:     1.0
  * Author:      xyulex
  * Author URI:  https://profiles.wordpress.org/xyulex/
  * License:     GPLv2 or later
@@ -86,10 +86,12 @@
 
                         onsubmit: function(e) {
                             if (e.data.annotation) { 
+                                var dataAnnotation = e.data.annotation;
+
                                 if ($(node).attr("data-annotation")) {
                                     editor.dom.remove(node);
                                 }
-                               editor.selection.setContent('<span class="annotation"  data-annotation="' + e.data.annotation + '" style="background-color:' + e.data.annotationbg + '">' + selectedText + '</span>');
+                               editor.selection.setContent('<span class="annotation"  data-annotation="' + dataAnnotation.replace(/"/g,'&quot;') + '" style="background-color:' + e.data.annotationbg + '">' + selectedText + '</span>');
 
                             } else {
                                 editor.windowManager.alert("Select the color and the annotation text");

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: TinyMCE Annotate
  * Description: Create annotations on your posts or pages
- * Version:     0.2.2
+ * Version:     1.0
  * Author:      xyulex
  * Author URI:  https://profiles.wordpress.org/xyulex/
  * License:     GPLv2 or later
@@ -12,6 +12,7 @@
 add_filter('the_content', 'tma_annotate_backend');
 add_filter('mce_css', 'tma_annotate_css');
 add_action('admin_head', 'tma_annotate');
+
 
 function tma_annotate_css($mce_css) {
   if (!empty($mce_css))
