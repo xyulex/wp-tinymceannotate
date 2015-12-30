@@ -11,10 +11,10 @@
   cursor:pointer;
 }
 
-.annotation:hover:after {   
+.annotation:hover:after {
   content: attr(data-annotation);
   color: #333;
-  position: absolute;   
+  position: absolute;
   white-space:normal;
   z-index: 20px;
   -moz-border-radius: 5px;
