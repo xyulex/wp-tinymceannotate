@@ -115,7 +115,11 @@
             onclick: function() {
                 var selectedText = editor.selection.getContent();
                 var selectedTextLength = selectedText.length;
-                if (selectedTextLength > 0) {
+                var node = editor.selection.getNode();
+                if (selectedTextLength > 0 || node.className == 'annotation') {
+                     if (node.className == 'annotation') {
+                        selectedText = node.innerHTML;
+                    }
                     deletionNode = editor.selection.getNode();
                     replaceNode = deletionNode;
                     $(deletionNode).attr("style", "");
