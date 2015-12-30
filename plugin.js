@@ -69,7 +69,10 @@
                 var selectedText = editor.selection.getContent();
                 var selectedTextLength = selectedText.length;
 
-                if (selectedTextLength > 0) {
+                if (selectedTextLength > 0 || node.className == 'annotation') {
+                    if (node.className == 'annotation') {
+                        selectedText = node.innerHTML;
+                    }
                     editor.windowManager.open({
                         title: 'Annotation options',
                         body: [{
