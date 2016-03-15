@@ -1,7 +1,7 @@
 /**
  * Plugin Name: TinyMCE Annotate
  * Description: Create annotations on your posts or pages
- * Version:     1.0
+ * Version:     1.1
  * Author:      xyulex
  * Author URI:  https://profiles.wordpress.org/xyulex/
  * License:     GPLv2 or later
@@ -9,8 +9,8 @@
  */
 
 (function($) {
-
     tinymce.PluginManager.add('tma_annotate', function(editor, url) {
+
         var state;
 
         function tma_hide_action() {
@@ -94,7 +94,7 @@
                                 if ($(node).attr("data-annotation")) {
                                     editor.dom.remove(node);
                                 }
-                               editor.selection.setContent('<span class="annotation"  data-annotation="' + dataAnnotation.replace(/"/g,'&quot;') + '" style="background-color:' + e.data.annotationbg + '">' + selectedText + '</span>');
+                               editor.selection.setContent('<span class="annotation" data-author="' + TMA.author + '" data-annotation="' + dataAnnotation.replace(/"/g,'&quot;') + '" style="background-color:' + e.data.annotationbg + '">' + selectedText + '</span>');
 
                             } else {
                                 editor.windowManager.alert("Select the color and the annotation text");
@@ -137,5 +137,6 @@
             cmd: 'tma_cmd_hide',
             onPostRender: tma_toggleHide
         });
+
     });
 })(jQuery);
