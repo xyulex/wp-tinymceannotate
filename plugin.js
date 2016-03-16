@@ -97,13 +97,13 @@
                                editor.selection.setContent('<span class="annotation" data-author="' + TMA.author + '" data-annotation="' + dataAnnotation.replace(/"/g,'&quot;') + '" style="background-color:' + e.data.annotationbg + '">' + selectedText + '</span>');
 
                             } else {
-                                editor.windowManager.alert("Select the color and the annotation text");
+                                editor.windowManager.alert(TMA.missing_fields);
                                 return false;
                             }
                         }
                     });
                 } else {
-                    editor.windowManager.alert("Please select some text for creating an annotation", false);
+                    editor.windowManager.alert(TMA.missing_annotation, false);
                 }
             }
         });
@@ -125,7 +125,7 @@
                     $(deletionNode).attr("style", "");
                     editor.dom.remove(replaceNode, deletionNode);
                 } else {
-                    editor.windowManager.alert("Please select the annotation you want to delete");
+                    editor.windowManager.alert(TMA.missing_selected);
                 }
             }
         });

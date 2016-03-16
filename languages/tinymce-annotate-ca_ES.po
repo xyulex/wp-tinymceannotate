@@ -1,0 +1,23 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tinymce-annotate\n"
+"POT-Creation-Date: 2016-03-16 12:53+0100\n"
+"PO-Revision-Date: 2016-03-16 13:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"Language: es-ES\n"
+
+msgid "Select the color and the annotation text"
+msgstr "Encara no has creat cap etiqueta"
+
+msgid "Please select some text for creating an annotation"
+msgstr "Selecciona el text per a crear l'annotació"
+
+msgid "Please select the annotation you want to delete"
+msgstr "Selecciona l'anotació per a esborrar-la"

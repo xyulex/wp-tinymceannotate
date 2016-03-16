@@ -2,8 +2,8 @@
 Contributors: xyulex
 Tags: tinymce, tiny mce, tiny, advanced, note, notes, annotate, annotation, annotations, plugin, post, tinymce advanced, annotator, widget, edit, create annotation, edit annotation.
 Requires at least: 3.0
-Tested up to: 4.4
-Stable tag: 1.0
+Tested up to: 4.5
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=C2DCQ4BXXVR3A
@@ -49,6 +49,13 @@ Make sure you have selected at least a character.
 2. Create annotation
 
 == Changelog ==
+= 1.1 =
+Release date: March 20, 2016.
+
+* Show annotation author.
+* Select annotation without doing it with the mouse.
+* Added I18n.
+
 = 1.0 =
 Release date: November 10, 2015.
 

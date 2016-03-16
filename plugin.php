@@ -2,6 +2,8 @@
 /**
  * Plugin Name: TinyMCE Annotate
  * Description: Create annotations on your posts or pages
+ * Text Domain: tinymce-annotate
+ * Domain Path: /languages
  * Version:     1.1
  * Author:      xyulex
  * Author URI:  https://profiles.wordpress.org/xyulex/
@@ -38,8 +40,18 @@ function tma_annotate() {
     // Add to first row of the TinyMCE buttons
     add_filter('mce_buttons', 'tma_annotate_button');
 
+    // I18n
+    load_plugin_textdomain('tinymce-annotate', FALSE, dirname(plugin_basename(__FILE__)).'/languages/');
     $current_user = wp_get_current_user();
-    wp_localize_script( 'tmajs', 'TMA', array( 'id' => $current_user->ID, 'author' =>  $current_user->display_name));
+    wp_register_script( 'tmajs', plugins_url('/plugin.js', __FILE__));
+    wp_localize_script( 'tmajs', 'TMA', array(
+            'id'                    => $current_user->ID,
+            'author'                => $current_user->display_name,
+            'missing_fields'        => __('Select the color and the annotation text', 'tinymce-annotate'),
+            'missing_annotation'    => __('Please select some text for creating an annotation', 'tinymce-annotate'),
+            'missing_selected'      => __('Please select the annotation you want to delete', 'tinymce-annotate')
+            )
+    );
     wp_enqueue_script( 'tmajs' );
 }
 
