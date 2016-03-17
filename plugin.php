@@ -44,14 +44,28 @@ function tma_annotate() {
     load_plugin_textdomain('tinymce-annotate', FALSE, dirname(plugin_basename(__FILE__)).'/languages/');
     $current_user = wp_get_current_user();
     wp_register_script( 'tmajs', plugins_url('/plugin.js', __FILE__));
-    wp_localize_script( 'tmajs', 'TMA', array(
-            'id'                    => $current_user->ID,
-            'author'                => $current_user->display_name,
-            'missing_fields'        => __('Select the color and the annotation text', 'tinymce-annotate'),
-            'missing_annotation'    => __('Please select some text for creating an annotation', 'tinymce-annotate'),
-            'missing_selected'      => __('Please select the annotation you want to delete', 'tinymce-annotate')
-            )
+    wp_localize_script( 'tmajs', 'TMA',
+        array(
+            'id'        => $current_user->ID,
+            'author'    => $current_user->display_name,
+            'errors'    => array(
+                            'missing_fields'        => __('Select the color and the annotation text', 'tinymce-annotate'),
+                            'missing_annotation'    => __('Please select some text for creating an annotation', 'tinymce-annotate'),
+                            'missing_selected'      => __('Please select the annotation you want to delete', 'tinymce-annotate')
+                            ),
+            'tooltips'  => array(
+                            'annotation_settings'   => __('Annotation settings', 'tinymce-annotate'),
+                            'annotation_create'     => __('Create annotation', 'tinymce-annotate'),
+                            'annotation_delete'     => __('Delete annotation', 'tinymce-annotate'),
+                            'annotation_hide'       => __('Hide annotations', 'tinymce-annotate')
+                            ),
+            'settings'  => array(
+                            'setting_annotation'    => __('Annotation', 'tinymce-annotate'),
+                            'setting_background'    => __('Background color', 'tinymce-annotate')
+                            )
+        )
     );
+
     wp_enqueue_script( 'tmajs' );
 }
 

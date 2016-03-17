@@ -45,7 +45,7 @@
 
         // Create annotation
         editor.addButton('tma_annotate', {
-            title: 'Create annotation',
+            title: TMA.tooltips.annotation_create,
             image: url + '/img/annotation.png',
             onclick: function() {
                 annotation = '';
@@ -74,16 +74,16 @@
                         selectedText = node.innerHTML;
                     }
                     editor.windowManager.open({
-                        title: 'Annotation options',
+                        title: TMA.tooltips.annotation_settings,
                         body: [{
                             type: 'textbox',
                             name: 'annotation',
-                            label: 'Annotation',
+                            label: TMA.settings.setting_annotation,
                             value: annotation
                         }, {
                             type: 'colorpicker',
                             name: 'annotationbg',
-                            label: 'Background color',
+                            label: TMA.settings.setting_background,
                             value: color
                         }],
 
@@ -97,20 +97,20 @@
                                editor.selection.setContent('<span class="annotation" data-author="' + TMA.author + '" data-annotation="' + dataAnnotation.replace(/"/g,'&quot;') + '" style="background-color:' + e.data.annotationbg + '">' + selectedText + '</span>');
 
                             } else {
-                                editor.windowManager.alert(TMA.missing_fields);
+                                editor.windowManager.alert(TMA.errors.missing_fields);
                                 return false;
                             }
                         }
                     });
                 } else {
-                    editor.windowManager.alert(TMA.missing_annotation, false);
+                    editor.windowManager.alert(TMA.errors.missing_annotation, false);
                 }
             }
         });
 
         // Delete annotation
         editor.addButton('tma_annotatedelete', {
-            title: 'Delete annotation',
+            title: TMA.tooltips.annotation_delete,
             image: url + '/img/annotation-delete.png',
             onclick: function() {
                 var selectedText = editor.selection.getContent();
@@ -125,14 +125,14 @@
                     $(deletionNode).attr("style", "");
                     editor.dom.remove(replaceNode, deletionNode);
                 } else {
-                    editor.windowManager.alert(TMA.missing_selected);
+                    editor.windowManager.alert(TMA.errors.missing_selected);
                 }
             }
         });
 
         // Hide all annotations
         editor.addButton('tma_annotatehide', {
-            title: 'Hide all annotations',
+            title: TMA.tooltips.annotation_hide,
             image: url + '/img/annotation-hide.png',
             cmd: 'tma_cmd_hide',
             onPostRender: tma_toggleHide

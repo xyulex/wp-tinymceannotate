@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tinymce-annotate\n"
 "POT-Creation-Date: 2016-03-16 12:53+0100\n"
-"PO-Revision-Date: 2016-03-16 13:23+0100\n"
+"PO-Revision-Date: 2016-03-17 09:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,3 +21,21 @@ msgstr "Selecciona el texto para crear la anotación"
 
 msgid "Please select the annotation you want to delete"
 msgstr "Selecciona la anotación que deseas eliminar"
+
+msgid "Delete annotation"
+msgstr "Borrar anotación"
+
+msgid "Create annotation"
+msgstr "Crear anotación"
+
+msgid "Hide annotations"
+msgstr "Ocultar anotaciones"
+
+msgid "Annotation settings"
+msgstr "Parámetros de anotación"
+
+msgid "Annotation"
+msgstr "Anotación"
+
+msgid "Background color"
+msgstr "Color de fondo"

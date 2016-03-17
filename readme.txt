@@ -50,11 +50,11 @@ Make sure you have selected at least a character.
 
 == Changelog ==
 = 1.1 =
-Release date: March 20, 2016.
+Release date: March 21, 2016.
 
 * Show annotation author.
 * Select annotation without doing it with the mouse.
-* Added I18n.
+* Added I18n (English, Spanish and Catalan).
 
 = 1.0 =
 Release date: November 10, 2015.
