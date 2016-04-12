@@ -1,7 +1,7 @@
 /**
  * Plugin Name: TinyMCE Annotate
  * Description: Create annotations on your posts or pages
- * Version:     1.1
+ * Version:     1.1.2
  * Author:      xyulex
  * Author URI:  https://profiles.wordpress.org/xyulex/
  * License:     GPLv2 or later
