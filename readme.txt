@@ -2,7 +2,7 @@
 Contributors: xyulex, freemius
 Tags: tinymce, tiny mce, tiny, advanced, note, notes, annotate, annotation, annotations, plugin, post, tinymce advanced, annotator, widget, edit, create annotation, edit annotation.
 Requires at least: 3.0
-Tested up to: 4.5
+Tested up to: 4.7
 Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,8 +16,8 @@ Create annotations in your content.
 > [Github](http://github.com/xyulex/) | [Twitter](http://twitter.com/ffreaker)
 
 > #### Help me
-> Rate the plugin [here!](https://wordpress.org/support/view/plugin-reviews/tinymce-annotate?rate=5#postform "Rate it!")
-> or [Buy me a coffee](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=C2DCQ4BXXVR3A) :)
+> Rate the plugin [here!](https://wordpress.org/support/plugin/tinymce-annotate/reviews/)
+> or [Buy me a coffee if you like!](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=C2DCQ4BXXVR3A)
 
 * You can create annotations in your pages or posts.
 * Once read, you can delete or edit them as well as creating new ones.
@@ -49,6 +49,13 @@ Make sure you have selected at least a character.
 2. Create annotation
 
 == Changelog ==
+
+= 1.1.2 =
+Release date: September 03, 2016
+
+* WordPress 4.6 update.
+* Changed readme to match new review URL.
+
 = 1.1.1 =
 Release date: April 07, 2016
 
