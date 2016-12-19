@@ -50,6 +50,9 @@ Make sure you have selected at least a character.
 
 == Changelog ==
 
+= 1.2 =
+Annotation title added.
+
 = 1.1.2 =
 Release date: September 03, 2016
 

@@ -4,14 +4,21 @@
  * Description: Create annotations on your posts or pages
  * Text Domain: tinymce-annotate
  * Domain Path: /languages
- * Version:     1.1.2
- * Author:      xyulex
+ * Version:     1.2
+ * Author:      Raúl Martínez
  * Author URI:  https://profiles.wordpress.org/xyulex/
  * License:     GPLv2 or later
  * License URI:	http://www.gnu.org/licenses/gpl-2.0.html
  */
-// Create a helper function for easy SDK access.
 
+add_filter('the_content', 'tma_annotate_backend');
+add_filter('mce_css', 'tma_annotate_css');
+add_filter('default_content', 'tma_dummy_post_content', 10 , 2);
+add_filter('default_title', 'tma_dummy_post_title', 10 , 2);
+add_action('admin_head', 'tma_annotate');
+add_action('admin_menu', 'tma_settings_page');
+
+// Freemius start
 function ta_fs() {
     global $ta_fs;
 
@@ -39,15 +46,6 @@ function ta_fs() {
     return $ta_fs;
 }
 
-// Init Freemius.
-ta_fs();
-
-
-add_filter('the_content', 'tma_annotate_backend');
-add_filter('mce_css', 'tma_annotate_css');
-add_filter('default_content', 'tma_dummy_post_content', 10 , 2);
-add_filter('default_title', 'tma_dummy_post_title', 10 , 2);
-add_action('admin_head', 'tma_annotate');
 
 
 function tma_dummy_post_content( $content , $post ) {
@@ -71,14 +69,74 @@ function tma_dummy_post_title( $title , $post ) {
 }
 
 
-function tma_dummy_redirect($url)
-{
+function tma_dummy_redirect($url) {
     return "/post_new.php?tinymce-annotate=true";
 }
 
-add_filter( 'after_skip_url' , 'tma_dummy_redirect' );
+add_filter( 'after_skip_url'    , 'tma_dummy_redirect' );
 add_filter( 'after_connect_url' , 'tma_dummy_redirect' );
 
+ta_fs();
+
+// END Freemius 
+
+
+// Settings
+function tma_settings_page() {
+    $page_title = 'TinyMCE Annotate settings';
+    $menu_title = 'TinyMCE Annotate';
+    $capability = 'edit_posts';
+    $menu_slug = 'tinymceannotate-settings';
+    $function = 'tma_settings_form';
+    $icon_url = 'dashicons-format-aside';
+    $position = 24;
+
+    add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
+}
+
+
+function tma_settings_form() {
+    if (isset($_POST['tma_showonfrontend'])) {
+        update_option('tma_showonfrontend', $_POST['tma_showonfrontend']);
+    } else {
+        update_option('tma_showonfrontend', 0);
+    }
+
+    $value = get_option('tma_showonfrontend');    
+
+    ?>
+    <h1><?php echo __('TinyMCE Annotate settings', 'tinymce-annotate'); ?></h1>
+    <form method="POST">        
+        <br /><h2><?php echo __('General options', 'tinymce-annotate'); ?></h2>
+        <input type="checkbox" name="tma_showonfrontend" id="tma_showonfrontend" value="1" <?php if ( 1 == $value ) echo 'checked="checked"'; ?>>
+        <label for="tma_showonfrontend"><?php echo __('Show annotations on frontend', 'tinymce-annotate') ?></label>
+        
+        <?php $args = array(
+       'public'   => true,
+       '_builtin' => false,
+        );
+
+        $output = 'names'; // names or objects, note names is the default
+        $operator = 'and'; // 'and' or 'or'
+
+        $post_types = get_post_types( $args, $output, $operator ); 
+        
+
+        echo '<h2>Post types</h2>';    
+        if ($post_types) {
+            foreach ( $post_types  as $post_type ) {
+               echo '<p>' . $post_type . '</p>';
+            }
+        } else {
+            echo __('There are no registered post types at the moment', 'tinymce-annotate');
+        }
+        ?>
+        
+    <br /><br /><input type="submit" value="Save" class="button button-primary button-large">
+    </form>
+<?php  }
+
+// END Settings
 
 function tma_annotate_css($mce_css) {
   if (!empty($mce_css))
@@ -87,17 +145,24 @@ function tma_annotate_css($mce_css) {
     return $mce_css;
 }
 
-// Don't display annotations in frontend
+// Determine wether to show or not annotations in frontend
 function tma_annotate_backend($content) {
-    return preg_replace('/(<[^>]+) class="annotation" style=".*?"/i', '$1', $content);
+    $show = get_option('tma_showonfrontend');
+
+    if ($show == 0) {
+        return preg_replace('/(<[^>]+) class="annotation" style=".*?"/i', '$1', $content);
+    } else {
+        wp_enqueue_style( 'tma_styles', plugins_url( '/css/style.css', __FILE__ ) );
+        return $content;
+    }
 }
 
 function tma_annotate() {
     global $typenow;
 
-    // Only apply to posts and pages
-    if ( !in_array($typenow, array('post', 'page')) )
-        return ;
+    // Works for all custom post types. Uncomment on free version.
+    //if ( !in_array($typenow, array('post', 'page')) )
+    //    return ;
 
 	// Add as an external TinyMCE plugin
     add_filter('mce_external_plugins', 'tma_annotate_plugin');
@@ -114,19 +179,20 @@ function tma_annotate() {
             'id'        => $current_user->ID,
             'author'    => $current_user->display_name,
             'errors'    => array(
-                            'missing_fields'        => __('Select the color and the annotation text', 'tinymce-annotate'),
-                            'missing_annotation'    => __('Please select some text for creating an annotation', 'tinymce-annotate'),
-                            'missing_selected'      => __('Please select the annotation you want to delete', 'tinymce-annotate')
+                            'missing_fields'            => __('Select the color and the annotation text', 'tinymce-annotate'),
+                            'missing_annotation'        => __('Please select some text for creating an annotation', 'tinymce-annotate'),
+                            'missing_selected'          => __('Please select the annotation you want to delete', 'tinymce-annotate')
                             ),
             'tooltips'  => array(
-                            'annotation_settings'   => __('Annotation settings', 'tinymce-annotate'),
-                            'annotation_create'     => __('Create annotation', 'tinymce-annotate'),
-                            'annotation_delete'     => __('Delete annotation', 'tinymce-annotate'),
-                            'annotation_hide'       => __('Hide annotations', 'tinymce-annotate')
+                            'annotation_settings'       => __('Annotation settings', 'tinymce-annotate'),
+                            'annotation_create'         => __('Create annotation', 'tinymce-annotate'),
+                            'annotation_delete'         => __('Delete annotation', 'tinymce-annotate'),
+                            'annotation_hide'           => __('Hide annotations', 'tinymce-annotate')
                             ),
             'settings'  => array(
-                            'setting_annotation'    => __('Annotation', 'tinymce-annotate'),
-                            'setting_background'    => __('Background color', 'tinymce-annotate')
+                            'setting_annotationtitle'   => __('Annotation title', 'tinymce-annotate'),
+                            'setting_annotation'        => __('Annotation', 'tinymce-annotate'),
+                            'setting_background'        => __('Background color', 'tinymce-annotate')
                             )
         )
     );

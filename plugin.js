@@ -1,8 +1,8 @@
 /**
  * Plugin Name: TinyMCE Annotate
  * Description: Create annotations on your posts or pages
- * Version:     1.1.2
- * Author:      xyulex
+ * Version:     1.2
+ * Author:      Raúl Martínez
  * Author URI:  https://profiles.wordpress.org/xyulex/
  * License:     GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -49,17 +49,20 @@
             image: url + '/img/annotation.png',
             onclick: function() {
                 annotation = '';
+                annotationtitle = '';
                 color = '#F0E465';
                 node = editor.selection.getNode();
                 nodeName = node.nodeName;
 
                 if (nodeName == 'SPAN') {
+                    nodeDataTitle = $(node).attr("data-title");
                     nodeDataAnnotation = $(node).attr("data-annotation");
                     nodeDataStyle = $(node).css("background-color");
 
                     // Retrieve annotation and color
                     if (nodeDataAnnotation) {
                         annotation = nodeDataAnnotation;
+                        annotationtitle = nodeDataTitle;
                         var ctx = document.createElement('canvas').getContext('2d');
                         ctx.strokeStyle = nodeDataStyle;
                         var color = ctx.strokeStyle;
@@ -76,6 +79,11 @@
                     editor.windowManager.open({
                         title: TMA.tooltips.annotation_settings,
                         body: [{
+                            type: 'textbox',
+                            name: 'annotationtitle',
+                            label: TMA.settings.setting_annotationtitle,
+                            value: annotationtitle
+                        }, {
                             type: 'textbox',
                             name: 'annotation',
                             label: TMA.settings.setting_annotation,
@@ -94,7 +102,7 @@
                                 if ($(node).attr("data-annotation")) {
                                     editor.dom.remove(node);
                                 }
-                               editor.selection.setContent('<span class="annotation" data-author="' + TMA.author + '" data-annotation="' + dataAnnotation.replace(/"/g,'&quot;') + '" style="background-color:' + e.data.annotationbg + '">' + selectedText + '</span>');
+                               editor.selection.setContent('<span class="annotation" data-title="' + e.data.annotationtitle + '" data-author="' + TMA.author + '" data-annotation="' + dataAnnotation.replace(/"/g,'&quot;') + '" style="background-color:' + e.data.annotationbg + '" >' + selectedText + '</span>');
 
                             } else {
                                 editor.windowManager.alert(TMA.errors.missing_fields);
