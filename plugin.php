@@ -89,7 +89,7 @@ function tma_annotate_css($mce_css) {
 
 // Don't display annotations in frontend
 function tma_annotate_backend($content) {
-    return preg_replace('/(<[^>]+) class="annotation" style=".*?"/i', '$1', $content);
+    return preg_replace('/(<[^>]+) class="annotation".*?data-annotation=".*?"/i', '$1', $content);
 }
 
 function tma_annotate() {
